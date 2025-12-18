@@ -1,4 +1,4 @@
-package com.codingtestmobile.currencyexchange.feature.components
+package com.codingtestmobile.currencyexchange.feature.currency_exchange.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
