@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -124,19 +126,26 @@ fun ExchangeContent(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(text = "송금액 : ")
+            Text(
+                text = "송금액 : ",
+                modifier = Modifier.width(80.dp),
+                textAlign = TextAlign.End,
+            )
             OutlinedTextField(
                 value = uiState.sendAmount,
                 onValueChange = onAmountChanged,
                 modifier =
                     Modifier
                         .weight(1f)
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = 4.dp),
                 label = { Text("USD") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 singleLine = true,
             )
-            Text(text = "USD")
+            Text(
+                modifier = Modifier.padding(horizontal = 4.dp),
+                text = "USD",
+            )
         }
 
         Spacer(modifier = Modifier.height(64.dp))
