@@ -1,9 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+}
+
+// local.properties 파일 로드
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
 }
 
 android {
@@ -20,11 +29,19 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // local.properties에서 API 키를 읽어 BuildConfig에 노출
-        buildConfigField(
-            "String",
-            "API_KEY",
-            "\"${project.findProperty("CURRENCY_LAYER_API_KEY") ?: ""}\"",
-        )
+        val apiKey =
+            localProperties.getProperty("CURRENCY_LAYER_API_KEY")
+                ?: throw GradleException(
+                    """
+                |==================== ERROR ====================
+                | CURRENCY_LAYER_API_KEY가 설정되지 않았습니다.
+                | 
+                | local.properties 파일에 아래 내용을 추가해주세요:
+                | CURRENCY_LAYER_API_KEY=your_api_key_here
+                |===============================================
+                    """.trimMargin(),
+                )
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
 
     buildTypes {
