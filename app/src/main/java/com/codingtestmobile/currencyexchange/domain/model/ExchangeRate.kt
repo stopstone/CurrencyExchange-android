@@ -10,6 +10,7 @@ data class ExchangeRate(
     val krw: Double,
     val jpy: Double,
     val php: Double,
+    val timestamp: Long,
 ) {
     // 선택된 국가의 환율 반환
     fun getRate(country: Country): Double =

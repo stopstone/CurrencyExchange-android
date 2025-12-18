@@ -14,5 +14,6 @@ object ExchangeRateMapper {
             krw = response.quotes[KEY_USD_KRW] ?: DEFAULT_RATE,
             jpy = response.quotes[KEY_USD_JPY] ?: DEFAULT_RATE,
             php = response.quotes[KEY_USD_PHP] ?: DEFAULT_RATE,
+            timestamp = response.timestamp,
         )
 }
